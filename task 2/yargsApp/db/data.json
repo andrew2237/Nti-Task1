@@ -1,0 +1,24 @@
+[
+  {
+    "name": "andrew",
+    "phone": "01272468373",
+    "age": 21,
+    "transaction": [],
+    "email": "an@an.com",
+    "balance": 100,
+    "addedAt": "12/2/2022",
+    "updatedAt": "12/2/2022",
+    "id": 1
+  },
+  {
+    "name": "saed",
+    "phone": "01224181205",
+    "age": 31,
+    "transaction": [{ "addrId": 1644620385466, "transType": "add" }],
+    "email": "san@san.com",
+    "balance": 500,
+    "addedAt": "12/2/2022",
+    "updatedAt": "12/2/2022",
+    "id": 2
+  }
+]

@@ -1,10 +1,10 @@
 const taskoperator = document.querySelector("#taskoperator");
 const addOperatore = document.querySelector("#addOperatore");
 const operatoreHeads = ["Firstname", "Secondname", "Balance"];
-const getData=document.querySelector("#getData")
-const delAllUsers=document.querySelector("#delAllUsers")
-const singleUser=document.querySelector("#singleUser")
-const edUser = document.querySelector("#edUser")
+const getData = document.querySelector("#getData");
+const delAllUsers = document.querySelector("#delAllUsers");
+const singleUser = document.querySelector("#singleUser");
+const edUser = document.querySelector("#edUser");
 
 const createObej = (element, parent, textContent, classes, attributes) => {
   return { element, parent, textContent, classes, attributes };
@@ -36,7 +36,7 @@ const readFromStorage = (storageName) => {
   let data;
   try {
     data = JSON.parse(localStorage.getItem(storageName));
-    console.log(data)
+    console.log(data);
     if (data instanceof Object == false) throw new Error("Data not array");
   } catch (error) {
     data = [];
@@ -63,65 +63,63 @@ const addUser = document.querySelector("#addUser");
   
   })
 } */
-const drawUser=(operation,index)=>{
-  let d=createElement(createObej("tr",getData,null,null,[]))
-  createElement(createObej("td",d,operation.id,null,[]))
-  createElement(createObej("td",d,operation.Firstname,null,[]))
-  createElement(createObej("td",d,operation.Secondname,null,[]))
-  createElement(createObej("td",d,operation.Balance,null,[]))
-  const td  =createElement(createObej("td",d,null,null,[]))
-  const singleUser = createElement(createObej("button",td,"Show",null,[]))
-  singleUser.addEventListener("click",()=>{
-    console.log(ShowUser(operation))
-    
-  })
-  
-  const editUser = createElement(createObej("button", td, "Edit", "btn btn-warning mx-3", [])
-)
-editUser.addEventListener("click",()=>{
-  WriteInStorage("user",operation)
-  window.location.href="edit.html"
-})
-//<button id="delete" class="btn btn-danger mx-3">Delete</a>
-const delUserbtnn = createElement(
-  createObej("button", td, "delete", "btn btn-danger mx-3", [])
-)
-delUserbtnn.addEventListener("click",()=>{  
-  delUser(index) 
-})
-}
-const drawAllUsers=(opertaions)=>{
-  getData.textContent=""
-  if(opertaions.length==0) console.log("empty")
-  opertaions.forEach((opertaion,i)=> drawUser(opertaion,i))
+const drawUser = (operation, index) => {
+  let d = createElement(createObej("tr", getData, null, null, []));
+  createElement(createObej("td", d, operation.id, null, []));
+  createElement(createObej("td", d, operation.Firstname, null, []));
+  createElement(createObej("td", d, operation.Secondname, null, []));
+  createElement(createObej("td", d, operation.Balance, null, []));
+  const td = createElement(createObej("td", d, null, null, []));
+  const singleUser = createElement(createObej("button", td, "Show", null, []));
+  singleUser.addEventListener("click", () => {
+    console.log(ShowUser(operation));
+  });
 
-  
-}
-const delUser=(index)=>{
-  const users = readFromStorage("users")
-  users.splice(index,1)
-  WriteInStorage("users",users)
-  drawAllUsers(users)
-}
-const ShowUser=(user,index)=>{
-  WriteInStorage("user",user)
-  window.location.href="single.html"
-}
-const editSingleUser=(user)=>{
-  read.Firstname=user.Firstname
-  read.Secondname=user.Secondname
-  read.Balance=user.Balance 
-  WriteInStorage("user",user)
-  WriteInStorage("users",user)
-}
+  const editUser = createElement(
+    createObej("button", td, "Edit", "btn btn-warning mx-3", [])
+  );
+  editUser.addEventListener("click", () => {
+    WriteInStorage("user", operation);
+    window.location.href = "edit.html";
+  });
+  //<button id="delete" class="btn btn-danger mx-3">Delete</a>
+  const delUserbtnn = createElement(
+    createObej("button", td, "delete", "btn btn-danger mx-3", [])
+  );
+  delUserbtnn.addEventListener("click", () => {
+    delUser(index);
+  });
+};
+const drawAllUsers = (opertaions) => {
+  getData.textContent = "";
+  if (opertaions.length == 0) console.log("empty");
+  opertaions.forEach((opertaion, i) => drawUser(opertaion, i));
+};
+const delUser = (index) => {
+  const users = readFromStorage("users");
+  users.splice(index, 1);
+  WriteInStorage("users", users);
+  drawAllUsers(users);
+};
+const ShowUser = (user, index) => {
+  WriteInStorage("user", user);
+  window.location.href = "single.html";
+};
 
+const editSingleUser = (user) => {
+  operatoreHeads[0] = user.Firstname;
+  operatoreHeads[1] = user.Secondname;
+  operatoreHeads[2] = user.Balance;
+  WriteInStorage("user", user);
+  WriteInStorage("users", user);
+};
 
-if(getData){
-  drawAllUsers(readFromStorage("users"))
-  delAllUsers.addEventListener("click",()=>{
-    WriteInStorage("users",[])
-    drawAllUsers([])
-  }) 
+if (getData) {
+  drawAllUsers(readFromStorage("users"));
+  delAllUsers.addEventListener("click", () => {
+    WriteInStorage("users", []);
+    drawAllUsers([]);
+  });
 }
 if (addUser) {
   console.log("hello");
@@ -139,8 +137,8 @@ if (addUser) {
     WriteInStorage("users", operations);
   });
 }
-if(singleUser){
-  const u = readFromStorage("user")
+if (singleUser) {
+  const u = readFromStorage("user");
   singleUser.innerHTML = `
   <div class="col-md-6 col-12 border border-2 border-primary">
   <h5>ID</h5>
@@ -158,16 +156,14 @@ if(singleUser){
   <h5>Balance</h5>
   <p>${u.Balance} </p>
   </div>
-  `
-  console.log(u)
+  `;
+  console.log(u);
 }
 
-
-
-
-
 if (edUser) {
-  const readd= readFromStorage("user")
-  editSingleUser(readd)
-  }
-  
+  edUser.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const read = readFromStorage("user");
+    editSingleUser(read);
+  });
+}
