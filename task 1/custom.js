@@ -4,7 +4,7 @@ const operatoreHeads = ["Firstname", "Secondname", "Balance"];
 const getData = document.querySelector("#getData");
 const delAllUsers = document.querySelector("#delAllUsers");
 const singleUser = document.querySelector("#singleUser");
-const edUser = document.querySelector("#edUser");
+const editUser = document.querySelector("#editUser");
 
 const createObej = (element, parent, textContent, classes, attributes) => {
   return { element, parent, textContent, classes, attributes };
@@ -107,11 +107,13 @@ const ShowUser = (user, index) => {
 };
 
 const editSingleUser = (user) => {
-  operatoreHeads[0] = user.Firstname;
-  operatoreHeads[1] = user.Secondname;
-  operatoreHeads[2] = user.Balance;
+  let userdetail;
+  operatoreHeads[0].user = userdetail.Firstname;
+  operatoreHeads[1].user = userdetail.Secondname;
+  operatoreHeads[2].user = userdetail.Balance;
   WriteInStorage("user", user);
   WriteInStorage("users", user);
+  delAllUsers(user);
 };
 
 if (getData) {
@@ -160,10 +162,17 @@ if (singleUser) {
   console.log(u);
 }
 
-if (edUser) {
-  edUser.addEventListener("submit", (e) => {
+if (editUser) {
+  editUser.addEventListener("submit", (e) => {
     e.preventDefault();
-    const read = readFromStorage("user");
-    editSingleUser(read);
+    let operatore = {};
+    operatoreHeads.forEach(
+      (head) => (operatore[head] = editUser.elements[head].value)
+    );
+    const operations = readFromStorage("user");
+    operations.push(operatore);
+    console.log(operations);
+    WriteInStorage("user", operations);
+    WriteInStorage("users", operations);
   });
 }
