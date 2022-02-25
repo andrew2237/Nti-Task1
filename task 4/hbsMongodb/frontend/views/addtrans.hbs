@@ -1,0 +1,22 @@
+{{>header}}
+{{>navbar}}
+ <form method="post">
+        <div class="mb-3">
+            <input class="form-control" placeholder="name" name="name" disabled value="{{user._id}}">
+        </div>
+        <div class="mb-3">
+            <input class="form-control" placeholder="name" name="name" disabled value="{{user.name}}">
+        </div>
+        <div class="mb-3">
+            <input class="form-control" placeholder="balance" name="balance" disabled value="{{user.balance}}">
+        </div> 
+        <select name="transaction" class="form-control my-3">
+            <option value="withdraw" >Withdraw</option>
+            <option value="add" >Add</option>
+        </select>
+        <div class="mb-3">
+            <button class="btn btn-primary">Add Transaction</button>
+        </div>
+        </div>
+    </form>
+{{>footer}}

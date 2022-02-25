@@ -32,7 +32,7 @@ const user = mongoose.model("User", {
       transactiontype: {
         type: String,
         required: true,
-        minLength: 4,
+        // minLength: 4,
         maxLength: 20,
       },
     },

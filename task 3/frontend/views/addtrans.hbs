@@ -6,9 +6,14 @@
     </div>
     {{/if}}
     <form method="post" >
-        <div class="mb-3">
+       {{!--  <div class="mb-3">
             <input class="form-control" placeholder="transaction" name="transaction" value="{{transaction.transactiontype}}">
-        </div>
+        </div> --}}
+        
+        <select class="mb-3" name="transactiontype">
+            <option  value="add">add</option>
+            <option value="withdraw">withdraw</option>
+        </select>
         <div class="mb-3">
             <button class="btn btn-primary">add</button>
         </div>

@@ -77,9 +77,10 @@ const addtrans = async (req, res) => {
 const addTransLogic = async (req, res) => {
   try {
     const result = await user.findById(req.params.id);
+
     result.transaction.push(req.body);
-    result.save();
-    res.redirect(`/addtrans/${result._id}`);
+    await result.save();
+    res.redirect(`/`);
   } catch (e) {
     res.send(e.message);
   }
